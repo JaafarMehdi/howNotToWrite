@@ -5,9 +5,10 @@ module JustDont
     :price,
     :kind,
     :quantity
-  ].freeze
+  ]
 
-  def check_all_heades_present(file_headers)
+  def check_all_heades_present(file_headers, expanded=false)
+    ROW_HEADERS << :expanded_field if expanded
     (ROW_HEADERS - file_headers).empty?
   end
 
