@@ -9,18 +9,16 @@ class BrokenValidator
 
   def validate_client_profile
     errors = []
-    valid_name = validate_name
-    valid_grade = validate_grade
-    errors << :invalid_name unless valid_name
-    errors << :invalid_grade unless valid_grade
+    errors << :invalid_name unless name_valid?
+    errors << :invalid_grade unless grade_valid?
     { success: true, result: errors.blank?, errors: errors }
   end
 
-  def validate_name
+  def name_valid?
     name.present?
   end
 
-  def validate_grade
+  def grade_valid?
     grade.present? && grade < max_grade && grade > min_grade
   end
 end
