@@ -2,9 +2,9 @@ module RecordAttribute
 
   def list_kind_from_data(data)
     first_matched_record = data.first[1].dig(:matched, :new_version)&.compact&.first
-    return if first_matched_record.blank?
+    return first_matched_record.dig(:attributes, :kind) if first_matched_record.blank?
 
-    first_matched_record.dig(:attributes, :kind)
+    data.first[1].dig(:unmatched, 0, :attributes, :kind)
   end
 
   def list_kind_from_upload(data)
